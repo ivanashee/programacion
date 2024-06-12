@@ -1,4 +1,3 @@
-// registro-alumnos.component.ts
 import { Component } from '@angular/core';
 import { ApiService } from '../api.service';
 
@@ -21,38 +20,87 @@ export class RegistroAlumnosComponent {
     numero: ''
   };
 
+  inscripcion = {
+    cedulaAlumno: '',
+    nombreResponsable: '',
+    apellidoResponsable: '',
+    relacionResponsable: '',
+    nivel: '',
+    ciclo: '',
+    especializacion: 'ninguna',
+    gradoCurso: '',
+    turno: '',
+    matricula: ''
+  };
+
   mostrarFormularioAlumnos: boolean = false;
   mostrarFormularioResponsables: boolean = false;
+  mostrarFormularioInscripcion: boolean = false;
 
   constructor(private apiService: ApiService) {}
 
   mostrarFormularioAlumno() {
     this.mostrarFormularioAlumnos = true;
     this.mostrarFormularioResponsables = false;
+    this.mostrarFormularioInscripcion = false;
   }
 
   mostrarFormularioResponsable() {
-    this.mostrarFormularioAlumnos = false;
     this.mostrarFormularioResponsables = true;
+    this.mostrarFormularioAlumnos = false;
+    this.mostrarFormularioInscripcion = false;
+  }
+
+  mostrarFormularioInscripciones() {
+    this.mostrarFormularioInscripcion = true;
+    this.mostrarFormularioAlumnos = false;
+    this.mostrarFormularioResponsables = false;
   }
 
   submitFormAlumno() {
     this.apiService.registrarAlumno(this.alumno).subscribe(() => {
-      console.log('Alumno registrado exitosamente');
-      // Aquí podrías mostrar un mensaje de éxito o redirigir a otra página
+      alert('Alumno registrado con éxito');
+      this.alumno = {
+        nombre: '',
+        apellido: '',
+        fecha_nacimiento: '',
+        cedula: ''
+      };
     }, error => {
       console.error('Error al registrar alumno:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
     });
   }
 
   submitFormResponsable() {
     this.apiService.registrarResponsable(this.responsable).subscribe(() => {
-      console.log('Responsable registrado exitosamente');
-      // Aquí podrías mostrar un mensaje de éxito o redirigir a otra página
+      alert('Responsable registrado con éxito');
+      this.responsable = {
+        nombre: '',
+        apellido: '',
+        numero: ''
+      };
     }, error => {
       console.error('Error al registrar responsable:', error);
-      // Aquí podrías mostrar un mensaje de error al usuario
+    });
+  }
+
+  submitFormInscripcion() {
+    this.apiService.inscribirAlumno(this.inscripcion).subscribe(() => {
+      alert('Alumno inscrito con éxito');
+      this.inscripcion = {
+        cedulaAlumno: '',
+        nombreResponsable: '',
+        apellidoResponsable: '',
+        relacionResponsable: '',
+        nivel: '',
+        ciclo: '',
+        especializacion: 'ninguna',
+        gradoCurso: '',
+        turno: '',
+        matricula: ''
+      };
+    }, error => {
+      console.error('Error al inscribir alumno:', error);
     });
   }
 }

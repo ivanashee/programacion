@@ -1,9 +1,9 @@
-<!-- registro-alumnos.component.html -->
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
     <div class="navbar-nav">
       <button class="nav-link btn btn-link" (click)="mostrarFormularioAlumno()">Registrar Alumno</button>
       <button class="nav-link btn btn-link" (click)="mostrarFormularioResponsable()">Registrar Responsable</button>
+      <button class="nav-link btn btn-link" (click)="mostrarFormularioInscripciones()">Inscribir Alumno</button>
     </div>
   </div>
 </nav>
@@ -35,18 +35,93 @@
   <h2>Registro de Responsables</h2>
   <form (ngSubmit)="submitFormResponsable()">
     <div class="mb-3">
-      <label class="form-label">Nombre del Responsable:</label>
-      <input type="text" class="form-control" [(ngModel)]="responsable.nombre" name="nombre" required>
+      <label class="form-label">Nombre:</label>
+      <input type="text" class="form-control" [(ngModel)]="responsable.nombre" name="nombreResponsable" required>
     </div>
     <div class="mb-3">
-      <label class="form-label">Apellido del Responsable:</label>
-      <input type="text" class="form-control" [(ngModel)]="responsable.apellido" name="apellido" required>
+      <label class="form-label">Apellido:</label>
+      <input type="text" class="form-control" [(ngModel)]="responsable.apellido" name="apellidoResponsable" required>
     </div>
     <div class="mb-3">
-      <label class="form-label">Número del Responsable:</label>
-      <input type="text" class="form-control" [(ngModel)]="responsable.numero" name="numero" required>
+      <label class="form-label">Número:</label>
+      <input type="text" class="form-control" [(ngModel)]="responsable.numero" name="numeroResponsable" required>
     </div>
     <button type="submit" class="btn btn-primary">Registrar Responsable</button>
   </form>
 </div>
 
+<div class="container mt-3" *ngIf="mostrarFormularioInscripcion">
+  <h2>Inscripción de Alumnos</h2>
+  <form (ngSubmit)="submitFormInscripcion()">
+    <div class="mb-3">
+      <label class="form-label">Cédula del Alumno:</label>
+      <input type="text" class="form-control" [(ngModel)]="inscripcion.cedulaAlumno" name="cedulaAlumno" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nombre del Responsable:</label>
+      <input type="text" class="form-control" [(ngModel)]="inscripcion.nombreResponsable" name="nombreResponsable" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Apellido del Responsable:</label>
+      <input type="text" class="form-control" [(ngModel)]="inscripcion.apellidoResponsable" name="apellidoResponsable" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Relación con el Alumno:</label>
+      <select class="form-select" [(ngModel)]="inscripcion.relacionResponsable" name="relacionResponsable" required>
+        <option value="madre">Madre</option>
+        <option value="padre">Padre</option>
+        <option value="tutor">Tutor</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nivel:</label>
+      <select class="form-select" [(ngModel)]="inscripcion.nivel" name="nivel" required>
+        <option value="nivel_inicial">Nivel Inicial</option>
+        <option value="educacion_basica">Escolar Básica</option>
+        <option value="educacion_media">Media</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Ciclo:</label>
+      <select class="form-select" [(ngModel)]="inscripcion.ciclo" name="ciclo" required>
+        <option value="preescolar">Preescolar (Nivel Inicial)</option>
+        <option value="ciclo_1">Ciclo 1 (Educación Básica)</option>
+        <option value="ciclo_2">Ciclo 2 (Educación Básica)</option>
+        <option value="ciclo_3">Ciclo 3 (Educación Básica)</option>
+        <option value="bachillerato">Bachillerato (Educación Media)</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Grado/Curso:</label>
+      <select class="form-select" [(ngModel)]="inscripcion.gradoCurso" name="gradoCurso" required>
+        <option value="pre-jardin">Pre-Jardín</option>
+        <option value="jardin">Jardín</option>
+        <option value="preescolar">Preescolar</option>
+        <option value="primer_grado">Primer Grado</option>
+        <option value="segundo_grado">Segundo Grado</option>
+        <option value="tercer_grado">Tercer Grado</option>
+        <option value="cuarto_grado">Cuarto Grado</option>
+        <option value="quinto_grado">Quinto Grado</option>
+        <option value="sexto_grado">Sexto Grado</option>
+        <option value="septimo_grado">Séptimo Grado</option>
+        <option value="octavo_grado">Octavo Grado</option>
+        <option value="noveno_grado">Noveno Grado</option>
+        <option value="primer_curso">Primer Curso</option>
+        <option value="segundo_curso">Segundo Curso</option>
+        <option value="tercer_curso">Tercer Curso</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Turno:</label>
+      <select class="form-select" [(ngModel)]="inscripcion.turno" name="turno" required>
+        <option value="manana">Mañana</option>
+        <option value="tarde">Tarde</option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Matrícula:</label>
+      <input type="number" class="form-control" [(ngModel)]="inscripcion.matricula" name="matricula" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Inscribir Alumno</button>
+  </form>
+</div>
