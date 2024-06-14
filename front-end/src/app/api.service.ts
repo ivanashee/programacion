@@ -6,21 +6,23 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ApiService {
-  private alumnosUrl = 'http://127.0.0.1:8000/api/alumnos/';
-  private responsablesUrl = 'http://127.0.0.1:8000/api/responsables/';
-  private inscripcionesUrl = 'http://127.0.0.1:8000/api/inscripciones/';
+  private apiUrl = 'http://127.0.0.1:8000/api'; // Base URL de tu API
 
   constructor(private http: HttpClient) { }
 
   registrarAlumno(alumno: any): Observable<any> {
-    return this.http.post(this.alumnosUrl, alumno);
+    return this.http.post(`${this.apiUrl}/alumnos/`, alumno);
   }
 
   registrarResponsable(responsable: any): Observable<any> {
-    return this.http.post(this.responsablesUrl, responsable);
+    return this.http.post(`${this.apiUrl}/responsables/`, responsable);
   }
 
   inscribirAlumno(inscripcion: any): Observable<any> {
-    return this.http.post(this.inscripcionesUrl, inscripcion);
+    return this.http.post(`${this.apiUrl}/inscripciones/`, inscripcion);
+  }
+
+  obtenerResponsables(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/responsables/`);
   }
 }

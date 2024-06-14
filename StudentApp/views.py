@@ -15,9 +15,6 @@ class InscripcionViewSet(viewsets.ModelViewSet):
     queryset = Inscripcion.objects.all()
     serializer_class = InscripcionSerializer
 
-    def create(self, request, *args, **kwargs):
-        logger.info(f"Datos recibidos para crear inscripción: {request.data}")
-        return super().create(request, *args, **kwargs)
 class PagoViewSet(viewsets.ModelViewSet):
     queryset = Pago.objects.all()
     serializer_class = PagoSerializer
